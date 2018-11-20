@@ -1,0 +1,6 @@
+log4j:
+  rootCategory: ERROR, stdout
+  appender:
+    stdout: org.apache.log4j.ConsoleAppender
+      layout: org.apache.log4j.PatternLayout
+        ConversionPattern: %d{yyyy-MM-dd HH:mm:ss,SSS} %5p %c{1}:%L - %m%n

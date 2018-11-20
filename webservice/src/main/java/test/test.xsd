@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="QueryInvoiceInfoSoap" type="QueryInvoiceInfoSoap"/>
+  <xs:complexType name="QueryInvoiceInfo">
+    <xs:sequence>
+      <xs:element type="xs:string" name="PATIENT_ID"/>
+      <xs:element type="xs:string" name="PATIENT_NAME"/>
+      <xs:element type="xs:string" name="RECEIPT_NO"/>
+      <xs:element type="xs:string" name="PAY_DATE"/>
+      <xs:element type="xs:string" name="ACCOUNT_FLAG"/>
+      <xs:element type="xs:string" name="ACCOUNT_SUM1"/>
+      <xs:element type="xs:string" name="ORDER_NO"/>
+      <xs:element type="xs:string" name="PAY_CHANNEL"/>
+      <xs:element type="xs:string" name="INVOICE_TYPE"/>
+      <xs:element type="xs:string" name="VISIT_DATE"/>
+      <xs:element type="xs:string" name="VISIT_NO"/>
+      <xs:element type="xs:string" name="CARD_NO"/>
+      <xs:element type="xs:string" name="INSUR_TYPE"/>
+      <xs:element type="xs:string" name="INSUR_PAY"/>
+      <xs:element type="xs:string" name="ACCOUNT_PAY"/>
+      <xs:element type="xs:string" name="MYSELF_PAY"/>
+      <xs:element type="xs:string" name="INSUR_SELF_PAY"/>
+      <xs:element type="xs:string" name="CLASS_SELF_PAY"/>
+      <xs:element type="xs:string" name="OTHER_APY"/>
+      <xs:element type="xs:string" name="DIAGNOSIS_CODE"/>
+      <xs:element type="xs:string" name="DIAGNOSIS_NAME"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="QueryInvoiceInfo" name="QueryInvoiceInfo" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QueryInvoiceInfoSoap">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

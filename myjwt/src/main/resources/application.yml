@@ -1,0 +1,7 @@
+jwt:
+  header: Authorization
+  secret: caring
+  expiration: 60
+  tokenHead: "Bearer "
+  #需要认证的url路径
+  checkPath: /test/*

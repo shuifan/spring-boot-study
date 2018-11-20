@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Root" type="Root"/>
+  <xs:complexType name="Root">
+    <xs:sequence>
+      <xs:element type="result" name="result"/>
+      <xs:element type="Data" name="Data"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="departMent">
+    <xs:sequence>
+      <xs:element type="xs:string" name="sampleType"/>
+      <xs:element type="xs:string" name="lisItemName"/>
+      <xs:element type="xs:string" name="lisItemCode"/>
+      <xs:element type="xs:string" name="sendTime"/>
+      <xs:element type="xs:string" name="inceptTime"/>
+      <xs:element type="xs:string" name="acceptTime"/>
+      <xs:element type="xs:string" name="reportStatus"/>
+      <xs:element type="xs:string" name="approveTime"/>
+      <xs:element type="xs:string" name="doctorCode"/>
+      <xs:element type="xs:string" name="doctorName"/>
+      <xs:element type="xs:string" name="printSeq"/>
+      <xs:element type="xs:string" name="machineId"/>
+      <xs:element type="xs:string" name="sampleId"/>
+      <xs:element type="xs:string" name="reportNo"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Data">
+    <xs:sequence>
+      <xs:element type="departMent" name="departMent" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element type="xs:string" name="returnCode"/>
+      <xs:element type="xs:string" name="returnDesc"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

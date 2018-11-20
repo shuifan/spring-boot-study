@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QueryInvoiceInfoSoap>
+    <result>
+        <returnCode>1</returnCode>
+        <returnDesc></returnDesc>
+    </result>
+    <Data>
+        <QueryInvoiceInfo>
+            <PATIENT_ID>0002020916</PATIENT_ID>
+            <PATIENT_NAME>耿明利</PATIENT_NAME>
+            <RECEIPT_NO>000180569406</RECEIPT_NO>
+            <PAY_DATE>2017-12-08T05:45:17+08:00</PAY_DATE>
+            <ACCOUNT_FLAG>1</ACCOUNT_FLAG>
+            <ACCOUNT_SUM1>162.83</ACCOUNT_SUM1>
+            <ORDER_NO>000180569408</ORDER_NO>
+            <PAY_CHANNEL>1</PAY_CHANNEL>
+            <INVOICE_TYPE>普通门诊</INVOICE_TYPE>
+            <VISIT_DATE>2017-12-08T05:21:46+08:00</VISIT_DATE>
+            <VISIT_NO>15215212</VISIT_NO>
+            <CARD_NO>0002020916</CARD_NO>
+            <INSUR_TYPE>现金</INSUR_TYPE>
+            <INSUR_PAY>0</INSUR_PAY>
+            <ACCOUNT_PAY>0</ACCOUNT_PAY>
+            <MYSELF_PAY>162.83</MYSELF_PAY>
+            <INSUR_SELF_PAY>162.83</INSUR_SELF_PAY>
+            <CLASS_SELF_PAY>0</CLASS_SELF_PAY>
+            <OTHER_APY>0</OTHER_APY>
+            <DIAGNOSIS_CODE xml:space="preserve">6</DIAGNOSIS_CODE>
+            <DIAGNOSIS_NAME>泌尿系感染</DIAGNOSIS_NAME>
+        </QueryInvoiceInfo>
+        <QueryInvoiceInfo>
+            <PATIENT_ID>0002020916</PATIENT_ID>
+            <PATIENT_NAME>耿明利</PATIENT_NAME>
+            <RECEIPT_NO>000180569406</RECEIPT_NO>
+            <PAY_DATE>2017-12-08T05:45:17+08:00</PAY_DATE>
+            <ACCOUNT_FLAG>1</ACCOUNT_FLAG>
+            <ACCOUNT_SUM1>162.83</ACCOUNT_SUM1>
+            <ORDER_NO>000180569408</ORDER_NO>
+            <PAY_CHANNEL>1</PAY_CHANNEL>
+            <INVOICE_TYPE>普通门诊</INVOICE_TYPE>
+            <VISIT_DATE>2017-12-08T05:21:46+08:00</VISIT_DATE>
+            <VISIT_NO>15215212</VISIT_NO>
+            <CARD_NO>0002020916</CARD_NO>
+            <INSUR_TYPE>现金</INSUR_TYPE>
+            <INSUR_PAY>0</INSUR_PAY>
+            <ACCOUNT_PAY>0</ACCOUNT_PAY>
+            <MYSELF_PAY>162.83</MYSELF_PAY>
+            <INSUR_SELF_PAY>162.83</INSUR_SELF_PAY>
+            <CLASS_SELF_PAY>0</CLASS_SELF_PAY>
+            <OTHER_APY>0</OTHER_APY>
+            <DIAGNOSIS_CODE xml:space="preserve">7</DIAGNOSIS_CODE>
+            <DIAGNOSIS_NAME>泌尿系感染</DIAGNOSIS_NAME>
+        </QueryInvoiceInfo>
+    </Data>
+
+</QueryInvoiceInfoSoap>

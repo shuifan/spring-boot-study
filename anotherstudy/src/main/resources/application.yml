@@ -1,0 +1,7 @@
+server:
+  port: 2225
+
+jinchen:
+  ip-port: 172.17.10.233:8098
+  id: 610261010002
+  secret: 6711fc7db2014145b65618d0d6dc1114

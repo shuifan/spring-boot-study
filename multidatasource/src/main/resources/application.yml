@@ -1,0 +1,21 @@
+server:
+  port: 44444
+
+mysql:
+  datasource:
+    username: ${mysql.username:root}
+    password: ${mysql.password:FanDong}
+    url: jdbc:mysql://${mysql.host:127.0.0.1}:${mysql.port:3306}/jianhu-patient?characterEncoding=utf8
+    driverClassName: com.mysql.jdbc.Driver
+sqlserver:
+  datasource:
+    url: jdbc:sqlserver://172.17.10.238:14331;DatabaseName=bsris
+    username: kiosk
+    password: jhkiosk
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+oracle:
+  datasource:
+    url: jdbc:oracle:thin:@172.17.10.238:14334/bshis
+    username: jhuser_zsyy
+    password: zsyy9881
+    driverClassName: oracle.jdbc.OracleDriver

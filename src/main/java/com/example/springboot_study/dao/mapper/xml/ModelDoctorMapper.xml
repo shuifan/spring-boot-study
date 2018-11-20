@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot_study.dao.mapper.ModelDoctorMapper">
+
+	<!-- 开启二级缓存 -->
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.example.springboot_study.dao.entity.ModelDoctor">
+		<id column="id" property="id" />
+		<result column="doctor_code" property="doctorCode" />
+		<result column="doctor_name" property="doctorName" />
+		<result column="dept_code" property="deptCode" />
+		<result column="dept_name" property="deptName" />
+		<result column="is_expert" property="isExpert" />
+		<result column="avatar" property="avatar" />
+		<result column="title" property="title" />
+		<result column="intro" property="intro" />
+		<result column="created_date" property="createdDate" />
+		<result column="extra" property="extra" />
+		<result column="specialty" property="specialty" />
+		<result column="teach_title" property="teachTitle" />
+		<result column="expert_visit_time" property="expertVisitTime" />
+		<result column="dept_order" property="deptOrder" />
+		<result column="hospital_order" property="hospitalOrder" />
+		<result column="branch_code" property="branchCode" />
+		<result column="branch_name" property="branchName" />
+	</resultMap>
+
+</mapper>
