@@ -54,12 +54,14 @@ public class TestController {
 
     @PostMapping("/znode")
     public Object createNode(@RequestBody CreateNodeRequest createNodeRequest){
-        if (createNodeRequest.getPersistent()){
-            zkClient.createPersistent(createNodeRequest.getNodeName(), createNodeRequest.getNodeValue());
-        }else {
-            zkClient.createEphemeral(createNodeRequest.getNodeName(), createNodeRequest.getNodeValue());
-        }
-        return "ok";
+//        if (createNodeRequest.getPersistent()){
+//            zkClient.createPersistent(createNodeRequest.getNodeName(), createNodeRequest.getNodeValue());
+//        }else {
+//            zkClient.createEphemeral(createNodeRequest.getNodeName(), createNodeRequest.getNodeValue());
+//        }
+
+        String nameWithNo = zkClient.createEphemeralSequential(createNodeRequest.getNodeName(), createNodeRequest.getNodeValue());
+        return nameWithNo;
     }
 
     @DeleteMapping("/znode")
