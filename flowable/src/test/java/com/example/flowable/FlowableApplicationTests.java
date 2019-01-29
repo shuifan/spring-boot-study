@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,7 +30,9 @@ public class FlowableApplicationTests {
 
     @Test
     public void startProcessInstanceByKey(){
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("test");
+        Map<String, Object> map = new HashMap<>(2);
+        map.put("days", 1);
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("holiday", map);
         System.out.println(processInstance);
     }
 

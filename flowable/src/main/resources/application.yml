@@ -4,5 +4,6 @@ spring:
     username: ${mysql.username:root}
     password: ${mysql.password:FanDong}
     url: jdbc:mysql://${mysql.host:127.0.0.1}:${mysql.port:3306}/flowable?characterEncoding=utf8
-flowable:
-  async-executor-activate: false
+
+server:
+  port: 3333
