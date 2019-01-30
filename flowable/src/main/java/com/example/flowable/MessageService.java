@@ -1,5 +1,7 @@
 package com.example.flowable;
 
+import org.flowable.bpmn.model.FlowElement;
+import org.flowable.bpmn.model.SubProcess;
 import org.flowable.engine.delegate.DelegateExecution;
 import org.flowable.engine.delegate.JavaDelegate;
 import org.flowable.engine.delegate.TaskListener;
@@ -26,6 +28,10 @@ public class MessageService implements JavaDelegate, TaskListener {
         String eventName = delegateExecution.getEventName();
         logger.info("------------" + eventName + "---------------");
         System.out.println("dddddd");
+
+        FlowElement currentFlowElement = delegateExecution.getCurrentFlowElement();
+        SubProcess subProcess = currentFlowElement.getSubProcess();
+        subProcess.getFlowElementMap();
     }
 
     /**

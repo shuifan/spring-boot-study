@@ -28,15 +28,16 @@ public class TestController {
     @PostMapping("/processInstance")
     public Object startProcessInstanceByKey(@RequestParam("key") String key,
                                             @RequestParam("days") Integer days){
-        Map<String, Object> map = new HashMap<>(2);
+        Map<String, Object> map = new HashMap<>(4);
         map.put("days", days);
+//        map.put("loopCount", 1);
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(key, map);
         return processInstance.getId();
     }
 
     @PostMapping("/task")
     public Object completeTask(@RequestBody CompleteTaskRequest completeTaskRequest){
-        Map<String, Object> map = new HashMap<>(2);
+        Map<String, Object> map = new HashMap<>(4);
         map.put("operate", completeTaskRequest.getOperate());
         taskService.complete(completeTaskRequest.getTaskId(), map);
         return null;
