@@ -3,7 +3,9 @@ package com.example.zookeeper;
 
 import org.I0Itec.zkclient.IZkChildListener;
 import org.I0Itec.zkclient.IZkDataListener;
+import org.I0Itec.zkclient.IZkStateListener;
 import org.I0Itec.zkclient.ZkClient;
+import org.apache.zookeeper.Watcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,24 @@ public class TestController {
             @Override
             public void handleChildChange(String s, List<String> list) throws Exception {
                 logger.info("parentPath: " + s + "  currentChilds: " + list);
+            }
+        });
+
+        //监控状态变化  断线  重连
+        zkClient.subscribeStateChanges(new IZkStateListener() {
+            @Override
+            public void handleStateChanged(Watcher.Event.KeeperState keeperState) throws Exception {
+                System.out.println("重新连接");
+            }
+
+            @Override
+            public void handleNewSession() throws Exception {
+                System.out.println("重新连接1");
+            }
+
+            @Override
+            public void handleSessionEstablishmentError(Throwable throwable) throws Exception {
+
             }
         });
     }
