@@ -1,7 +1,5 @@
 package com.example.flowable;
 
-import org.flowable.bpmn.model.FlowElement;
-import org.flowable.bpmn.model.SubProcess;
 import org.flowable.engine.delegate.DelegateExecution;
 import org.flowable.engine.delegate.JavaDelegate;
 import org.flowable.engine.delegate.TaskListener;
@@ -10,7 +8,10 @@ import org.flowable.task.service.delegate.DelegateTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -25,13 +26,8 @@ public class MessageService implements JavaDelegate, TaskListener {
     private static final ConcurrentHashMap<String, NextUserId> TASK_USER_MAP = new ConcurrentHashMap<>(16);
     @Override
     public void execute(DelegateExecution delegateExecution) {
-        String eventName = delegateExecution.getEventName();
-        logger.info("------------" + eventName + "---------------");
-        System.out.println("dddddd");
+        System.out.println("发消息通知结果");
 
-        FlowElement currentFlowElement = delegateExecution.getCurrentFlowElement();
-        SubProcess subProcess = currentFlowElement.getSubProcess();
-        subProcess.getFlowElementMap();
     }
 
     /**
@@ -62,16 +58,13 @@ public class MessageService implements JavaDelegate, TaskListener {
                 }
             }
 
-            logger.info("会签---userId=" + nextUserId.get() + "  " + "taskId=" + taskId);
+            logger.info("会签/或签 ---userId=" + nextUserId.get() + "  " + "taskId=" + taskId);
 
             //所有人都取到了就清除
             if (nextUserId.allGetted()){
                 TASK_USER_MAP.remove(processInstanceId);
                 System.out.println("清除MAP" + TASK_USER_MAP);
             }
-        }else {
-           //或签
-           logger.info("或签---userId=" + userIds + "  " + "taskId=" + taskId);
         }
     }
 }

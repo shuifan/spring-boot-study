@@ -1,10 +1,14 @@
 package com.example.flowable;
 
+import org.flowable.bpmn.model.FlowElement;
 import org.flowable.bpmn.model.SequenceFlow;
 import org.flowable.engine.TaskService;
-import org.flowable.engine.delegate.TaskListener;
+import org.flowable.engine.delegate.DelegateExecution;
+import org.flowable.engine.delegate.JavaDelegate;
 import org.flowable.identitylink.api.IdentityLink;
 import org.flowable.task.service.delegate.DelegateTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,11 +23,13 @@ import java.util.concurrent.ConcurrentHashMap;
  * @create 2019/1/30
  */
 @Component
-public class UserObtainService implements TaskListener {
+public class UserObtainService implements JavaDelegate {
 
     private static final String LABEL = "label";
 
-    private static final Map<String, List<String>> LABEL_USER_MAP = new ConcurrentHashMap<>(16);
+    public static final Map<String, List<String>> LABEL_USER_MAP = new ConcurrentHashMap<>(16);
+
+    private static Logger logger = LoggerFactory.getLogger(UserObtainService.class.getName());
 
     static {
         List<String> littleLeaders = new ArrayList<>(3);
@@ -40,7 +46,6 @@ public class UserObtainService implements TaskListener {
     @Autowired
     private TaskService taskService;
 
-    @Override
     public void notify(DelegateTask delegateTask) {
 
         SequenceFlow sequenceFlow = new SequenceFlow();
@@ -74,4 +79,9 @@ public class UserObtainService implements TaskListener {
 
     }
 
+    @Override
+    public void execute(DelegateExecution delegateExecution) {
+        FlowElement currentFlowElement = delegateExecution.getCurrentFlowElement();
+
+    }
 }

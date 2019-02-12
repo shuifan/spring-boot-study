@@ -5,50 +5,54 @@
     <startEvent id="startEvent1"></startEvent>
     <userTask id="sid-9726F15C-712F-42EA-AFAE-0FDF3110C726" name="小Leader" flowable:candidateUsers="label_little_leader,little_leader_2,little_leader_3">
       <extensionElements>
-        <flowable:taskListener event="create" class="com.example.flowable.UserObtainService"></flowable:taskListener>
         <flowable:taskListener event="create" class="com.example.flowable.MessageService"></flowable:taskListener>
       </extensionElements>
       <multiInstanceLoopCharacteristics isSequential="false">
-        <!--<loopCardinality>${loopCount}</loopCardinality>-->
+        <loopCardinality>${loop_b}</loopCardinality>
         <completionCondition>${nrOfCompletedInstances/nrOfInstances == 1}</completionCondition>
       </multiInstanceLoopCharacteristics>
     </userTask>
     <userTask id="sid-788975CC-1290-456B-BD6A-E6CDD1B74877" name="小Leader" flowable:candidateUsers="little_leader_1">
       <extensionElements>
-        <flowable:taskListener event="create" class="com.example.flowable.UserObtainService"></flowable:taskListener>
         <flowable:taskListener event="create" class="com.example.flowable.MessageService"></flowable:taskListener>
       </extensionElements>
+      <multiInstanceLoopCharacteristics isSequential="false">
+        <loopCardinality>${loop_a}</loopCardinality>
+        <completionCondition>${nrOfCompletedInstances == 1}</completionCondition>
+      </multiInstanceLoopCharacteristics>
     </userTask>
     <sequenceFlow id="sid-4EC68006-EF69-4C1D-AC62-1EF081A5BE08" sourceRef="startEvent1" targetRef="sid-4C594BEE-CA88-4951-AAE4-AC593F169F30"></sequenceFlow>
     <exclusiveGateway id="sid-4C594BEE-CA88-4951-AAE4-AC593F169F30"></exclusiveGateway>
     <exclusiveGateway id="sid-FB3F75D2-AC7E-43D2-B764-6A87315FB05A"></exclusiveGateway>
     <userTask id="sid-C76BD9B0-2AC8-406E-9FFC-7B9E9B7E41EE" name="中Leader" flowable:candidateUsers="label_big_leader,big_leader_2">
       <extensionElements>
-        <flowable:taskListener event="create" class="com.example.flowable.UserObtainService"></flowable:taskListener>
         <flowable:taskListener event="create" class="com.example.flowable.MessageService"></flowable:taskListener>
       </extensionElements>
       <multiInstanceLoopCharacteristics isSequential="false">
-        <loopCardinality>2</loopCardinality>
+        <loopCardinality>${loop_c}</loopCardinality>
         <completionCondition>${nrOfCompletedInstances == 1}</completionCondition>
       </multiInstanceLoopCharacteristics>
     </userTask>
-    <sequenceFlow id="sid-FB84B56A-4C42-4D6D-AFCC-127371A37408" sourceRef="sid-9726F15C-712F-42EA-AFAE-0FDF3110C726" targetRef="sid-FB3F75D2-AC7E-43D2-B764-6A87315FB05A"></sequenceFlow>
     <sequenceFlow id="sid-34F43F6F-4FF0-4098-A773-78F4AAF201AF" sourceRef="sid-788975CC-1290-456B-BD6A-E6CDD1B74877" targetRef="sid-A432688E-208B-4CA3-A7C3-D9620C4AA60A"></sequenceFlow>
     <sequenceFlow id="oneDay" name="一天" sourceRef="sid-4C594BEE-CA88-4951-AAE4-AC593F169F30" targetRef="sid-788975CC-1290-456B-BD6A-E6CDD1B74877">
       <conditionExpression xsi:type="tFormalExpression"><![CDATA[${days == 1}]]></conditionExpression>
-    </sequenceFlow>
-    <sequenceFlow id="sid-3700E71A-BE43-4178-96DB-4FD155510922" name="二、三天" sourceRef="sid-4C594BEE-CA88-4951-AAE4-AC593F169F30" targetRef="sid-9726F15C-712F-42EA-AFAE-0FDF3110C726">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${days > 1}]]></conditionExpression>
-    </sequenceFlow>
-    <sequenceFlow id="sid-0BE5BAAC-BF55-426B-B655-23752E5F9C36" name="驳回" sourceRef="sid-FB3F75D2-AC7E-43D2-B764-6A87315FB05A" targetRef="sid-A432688E-208B-4CA3-A7C3-D9620C4AA60A">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${!approved}]]></conditionExpression>
     </sequenceFlow>
     <sequenceFlow id="sid-B1FDE39A-64C4-429C-A3B8-0B9620DA9B60" sourceRef="sid-C76BD9B0-2AC8-406E-9FFC-7B9E9B7E41EE" targetRef="sid-A432688E-208B-4CA3-A7C3-D9620C4AA60A"></sequenceFlow>
     <serviceTask id="sid-A432688E-208B-4CA3-A7C3-D9620C4AA60A" name="发消息通知结果" flowable:class="com.example.flowable.MessageService"></serviceTask>
     <endEvent id="sid-59CBBEFE-1A81-46E8-8DBB-C0CDECDD5C23"></endEvent>
     <sequenceFlow id="sid-229A66A1-4909-4459-8DEA-7969EB449A3F" sourceRef="sid-A432688E-208B-4CA3-A7C3-D9620C4AA60A" targetRef="sid-59CBBEFE-1A81-46E8-8DBB-C0CDECDD5C23"></sequenceFlow>
+    <sequenceFlow id="sid-3700E71A-BE43-4178-96DB-4FD155510922" name="二、三天" sourceRef="sid-4C594BEE-CA88-4951-AAE4-AC593F169F30" targetRef="sid-9726F15C-712F-42EA-AFAE-0FDF3110C726">
+      <extensionElements>
+        <flowable:executionListener event="take" class="com.example.flowable.UserObtainService"></flowable:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${days > 1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-FB84B56A-4C42-4D6D-AFCC-127371A37408" sourceRef="sid-9726F15C-712F-42EA-AFAE-0FDF3110C726" targetRef="sid-FB3F75D2-AC7E-43D2-B764-6A87315FB05A"></sequenceFlow>
     <sequenceFlow id="sid-41978FB6-F6F2-491B-9660-88443AE25A49" name="同意" sourceRef="sid-FB3F75D2-AC7E-43D2-B764-6A87315FB05A" targetRef="sid-C76BD9B0-2AC8-406E-9FFC-7B9E9B7E41EE">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${approved}]]></conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${operate == '同意'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-0BE5BAAC-BF55-426B-B655-23752E5F9C36" name="驳回" sourceRef="sid-FB3F75D2-AC7E-43D2-B764-6A87315FB05A" targetRef="sid-A432688E-208B-4CA3-A7C3-D9620C4AA60A">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${operate == '驳回'}]]></conditionExpression>
     </sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_holiday">
