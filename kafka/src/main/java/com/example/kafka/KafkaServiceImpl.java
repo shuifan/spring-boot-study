@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
@@ -53,7 +54,7 @@ public class KafkaServiceImpl implements KafkaService {
 
     @Override
     @KafkaListener(id = "3-test-1", topics = {"3-test"}, containerFactory = "kafkaListenerContainerFactory1")
-    public void listenPartition2(List<ConsumerRecord<String, String>> records) {
+    public void listenPartition2(List<ConsumerRecord<String, String>> records, Acknowledgment acknowledgment) {
         System.out.println(records.size());
         for (ConsumerRecord<String, String> consumerRecord : records){
             String value = consumerRecord.value();
@@ -61,10 +62,14 @@ public class KafkaServiceImpl implements KafkaService {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }finally {
+                //手动应答
+                acknowledgment.acknowledge();
             }
             logger.info("c 消息：partition " + consumerRecord.partition() + " value " + consumerRecord.value() + " thread id " + Thread.currentThread().getName());
         }
     }
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.example.kafka;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.kafka.support.Acknowledgment;
 
 import java.util.List;
 
@@ -34,5 +35,5 @@ public interface KafkaService {
      * 批量消费 某topic
      * @param records
      */
-    void listenPartition2(List<ConsumerRecord<String, String>> records);
+    void listenPartition2(List<ConsumerRecord<String, String>> records, Acknowledgment acknowledgment);
 }
