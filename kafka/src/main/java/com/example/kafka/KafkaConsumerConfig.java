@@ -9,6 +9,7 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.config.KafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.listener.AbstractMessageListenerContainer;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 
 import java.util.HashMap;
@@ -36,6 +37,24 @@ public class KafkaConsumerConfig {
         //设置为批量消费，每个批次数量在Kafka配置参数中设置ConsumerConfig.MAX_POLL_RECORDS_CONFIG
         factory.setBatchListener(true);
         factory.getContainerProperties().setPollTimeout(3000);
+        /**
+         * RECORD
+         * 每处理一条commit一次
+         * BATCH(默认)
+         * 每次poll的时候批量提交一次，频率取决于每次poll的调用频率
+         * TIME
+         * 每次间隔ackTime的时间去commit(跟auto commit interval有什么区别呢？)
+         * COUNT
+         * 累积达到ackCount次的ack去commit
+         * COUNT_TIME
+         * ackTime或ackCount哪个条件先满足，就commit
+         * MANUAL
+         * listener负责ack，但是背后也是批量上去
+         * MANUAL_IMMEDIATE
+         * listner负责ack，每调用一次，就立即commit
+         *
+         */
+        factory.getContainerProperties().setAckMode(AbstractMessageListenerContainer.AckMode.MANUAL_IMMEDIATE);
         return factory;
     }
 
@@ -54,6 +73,7 @@ public class KafkaConsumerConfig {
         //设置为批量消费，每个批次数量在Kafka配置参数中设置ConsumerConfig.MAX_POLL_RECORDS_CONFIG
         factory.setBatchListener(true);
         factory.getContainerProperties().setPollTimeout(3000);
+        factory.getContainerProperties().setAckMode(AbstractMessageListenerContainer.AckMode.MANUAL_IMMEDIATE);
         return factory;
     }
 
