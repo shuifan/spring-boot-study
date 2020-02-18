@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    username: root
+    password: chinacaring
+    url: jdbc:mysql://192.168.1.240:3306/kun_shan_danger?characterEncoding=utf8
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: false

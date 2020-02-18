@@ -1,12 +1,12 @@
 package com.example.demo;
 
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 /**
  * @author fandong
@@ -15,13 +15,28 @@ import java.util.Locale;
 @RestController
 public class Test {
 
-    @PostMapping("/test")
-    public Object test() throws ParseException {
-        TestReq testReq = new TestReq();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.SIMPLIFIED_CHINESE);
-        Date parse = sdf.parse("1992-09-15");
-        testReq.setB(parse);
-        return testReq;
+    @Autowired
+    private CodeWxidRepository codeWxidRepository;
+
+    @Autowired
+    private BaseInfoRepository baseInfoRepository;
+
+    @Autowired
+    private SomeMapper someMapper;
+
+    @GetMapping("/test")
+    @Transactional(rollbackFor = Exception.class)
+    public Object test() throws ParseException, InterruptedException {
+
+//        DebugUtils.transactionRequired("Test.test");
+        BaseInfo one = baseInfoRepository.findOne(1057);
+//        String lock = someMapper.lock("22C0E12D44D5455A913238F26C5FEE3");
+//        System.out.println(lock);
+        BaseInfo baseInfo = baseInfoRepository.findByZhiXinBianHao("22C0E12D44D5455A913238F26C5FEE3");
+
+        TransactionAspectSupport.currentTransactionStatus();
+        String te = someMapper.te("22C0E12D44D5455A913238F26C5FEE3");
+        return null;
     }
 
 
